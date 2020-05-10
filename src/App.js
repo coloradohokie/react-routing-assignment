@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect, Switch, NavLink } from 'react-router-dom'
 
 import Courses from './containers/Courses/Courses';
-import Course from './containers/Course/Course'
 import Users from './containers/Users/Users';
 
 class App extends Component {
@@ -10,12 +9,6 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <nav>
-            <ul>
-            <li><a href="/users">Users</a></li>
-            <li><a href="/courses">Courses</a></li>
-            </ul>
-          </nav>
 
           <ol style={{textAlign: 'left'}}>
             <li>Add Routes to load "Users" and "Courses" on different pages (by entering a URL, without Links)</li>
@@ -27,9 +20,16 @@ class App extends Component {
             <li>Add a 404 error page and render it for any unknown routes</li>
             <li>Redirect requests to /all-courses to /courses (=> Your "Courses" page)</li>
           </ol>
+          
+          <nav>
+            <ul>
+            <li><NavLink to="/users">Users</NavLink></li>
+            <li><NavLink to="/courses">Courses</NavLink></li>
+            </ul>
+          </nav>
+
           <Switch>
-            <Route path='/courses/:id/:title' exact component={Course} />
-            <Route path='/courses' exact component={Courses} />
+            <Route path='/courses' component={Courses} />
             <Route path='/users' component={Users} />
             <Redirect from='/all-courses' to='/courses' />
             <Route path='/' render={()=>(<h1>Not Found</h1>)} />
